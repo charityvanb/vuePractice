@@ -7,7 +7,7 @@
     <div id="app">
         <input type="text" v-on:input="changeTitle">
         <!-- You cannot use the curly braces inside an HTML element. V-bind allows you to use link. -->
-        <p>{{ title }} <a v-bind:href="link">Bosch fun times</a></p>
+        <p v-once>{{ title }} <a v-bind:href="link">Bosch fun times</a></p>
         <p>{{ sayHello() }}</p>
     </div>
     <script>
@@ -24,6 +24,7 @@
                 },
                 //Prints title as written
                 sayHello: function(){
+                    this.title= "Let's hang out in a giant bubble"
                     return this.title;
 
                 }
