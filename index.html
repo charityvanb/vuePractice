@@ -6,20 +6,23 @@
 <body>
     <div id="app">
         <input type="text" v-on:input="changeTitle">
-        <p>{{ title }}</p>
+        <!-- You cannot use the curly braces inside an HTML element. V-bind allows you to use link. -->
+        <p>{{ title }} <a v-bind:href="link">Bosch fun times</a></p>
         <p>{{ sayHello() }}</p>
     </div>
     <script>
         new Vue({
             el: '#app',
             data: {
-                title: 'Hello Weirdos!'
+                title: 'Hello Weirdos!',
+                link:'https://en.wikipedia.org/wiki/Hieronymus_Bosch'
             },
             methods: {
+                //Event listener that changes titles when you input data in a form.
                 changeTitle: function(event) {
                     this.title = event.target.value;
                 },
-
+                //Prints title as written
                 sayHello: function(){
                     return this.title;
 
