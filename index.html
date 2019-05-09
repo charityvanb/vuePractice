@@ -7,15 +7,26 @@
     <div id="app">
         <input type="text" v-on:input="changeTitle">
         <!-- You cannot use the curly braces inside an HTML element. V-bind allows you to use link. -->
-        <p v-once>{{ title }} <a v-bind:href="link">Bosch fun times</a></p>
+        <h1>{{ title }}</h1>
+        <p><a v-bind:href="link">Bosch fun times</a></p>
         <p>{{ sayHello() }}</p>
+        <p v-html="hurdygurdyLink"></p>
+        <button v-on:click="increase">Click me</button>
+        <!-- trying out an event listener -->
+        <p>{{ counter }}</p>
+        <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }}</p>
     </div>
     <script>
         new Vue({
             el: '#app',
             data: {
+                counter: 0,
+                x: 0,
+                y: 0,
                 title: 'Hello Weirdos!',
-                link:'https://en.wikipedia.org/wiki/Hieronymus_Bosch'
+                texty: 'Do Bosch, not drugs!',
+                link:'https://en.wikipedia.org/wiki/Hieronymus_Bosch',
+                hurdygurdyLink: '<a href="https://en.wikipedia.org/wiki/Hieronymus_Bosch#/media/File:Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_Hell.jpg">Check out this hurdygurdy!</a>'
             },
             methods: {
                 //Event listener that changes titles when you input data in a form.
@@ -24,9 +35,16 @@
                 },
                 //Prints title as written
                 sayHello: function(){
-                    this.title= "Let's hang out in a giant bubble"
-                    return this.title;
-
+                    this.texty= "Let's hang out in a giant bubble!"
+                    return this.texty;
+                },
+                increase: function() {
+                    this.counter++
+                },
+                updateCoordinates: function(event){
+                //   need to access the event object created above  
+                this.x = event.clientX;
+                this.y = event.clientY;
                 }
             }
         })
