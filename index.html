@@ -15,10 +15,16 @@
         <button v-on:click="increase(2, $event)">Click me</button>
         <!-- trying out an event listener -->
         <p>{{ counter }}</p>
-        <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }}</p>
-        <!-- Removing the above behavior from the line below.
-        Can also be done by simple writing v-on:mousemove.stop="" or using prevent. -->
-        <span v-on:mousemove="dummy">Nothing here</span>
+        <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }}
+            <!-- Removing the above behavior from the line below.
+            Can also be done by simple writing v-on:mousemove.stop="" or using prevent. -->
+            <span v-on:mousemove="dummy">Nothing here</span>
+        </p>
+        <!-- You can modify a keyup by putting dot then the key you want to modify it with -->
+        <input type="text" v-on:keyup.enter.space="alertMe">
+        <!-- To do two way data binding, you can use the v-model directive. -->
+        <input type="text" v-model="thisWord">
+        <p>{{ thisWord }}</p>
     </div>
     <script>
         new Vue({
@@ -30,7 +36,8 @@
                 title: 'Hello Weirdos!',
                 texty: 'Do Bosch, not drugs!',
                 link:'https://en.wikipedia.org/wiki/Hieronymus_Bosch',
-                hurdygurdyLink: '<a href="https://en.wikipedia.org/wiki/Hieronymus_Bosch#/media/File:Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_Hell.jpg">Check out this hurdygurdy!</a>'
+                hurdygurdyLink: '<a href="https://en.wikipedia.org/wiki/Hieronymus_Bosch#/media/File:Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_Hell.jpg">Check out this hurdygurdy!</a>',
+                thisWord: 'Riding them griffins in the garden.'
             },
             methods: {
                 //Event listener that changes titles when you input data in a form.
@@ -53,6 +60,9 @@
                 },
                 dummy: function(event) {
                     event.stopPropagation();
+                },
+                alertMe: function() {
+                    alert('Alert!');
                 }
             }
         })
